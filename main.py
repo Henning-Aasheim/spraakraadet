@@ -2,6 +2,14 @@ import requests
 from bs4 import BeautifulSoup
 import json
 import time
+import re
+
+def clean_text(text: str) -> str:
+    # Remove spaces before punctuation .,!?;:
+    text = re.sub(r"\s+([.,!?;:])", r"\1", text)
+    # Collapse multiple spaces inside the text
+    text = re.sub(r"\s{2,}", " ", text)
+    return text.strip()
 
 BASE_URL = 'https://sprakradet.no/spraksporsmal-og-svar/'
 
@@ -45,7 +53,8 @@ def get_content(url: str) -> list[dict]:
         question_paragraphs = []
         if question_div:
             for p in question_div.find_all('p'):
-                text = p.get_text(separator=' ', strip=True)
+                raw = p.get_text(separator=' ', strip=True)
+                text = clean_text(raw)
                 if text:
                     question_paragraphs.append(text)
 
@@ -55,7 +64,8 @@ def get_content(url: str) -> list[dict]:
         answer_paragraphs = []
         if answer_div:
             for p in answer_div.find_all('p'):
-                text = p.get_text(separator=' ', strip=True)
+                raw = p.get_text(separator=' ', strip=True)
+                text = clean_text(raw)
                 if text:
                     answer_paragraphs.append(text)
 
