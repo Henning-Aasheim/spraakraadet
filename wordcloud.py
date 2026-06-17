@@ -1,9 +1,6 @@
-import pandas as pd
 import matplotlib.pyplot as plt
 from wordcloud import WordCloud
 import json
-import nltk
-import spacy
 import nb_core_news_sm
 
 # Only need to run once
@@ -11,8 +8,7 @@ import nb_core_news_sm
 
 from nltk.corpus import stopwords
 
-#df = pd.read_json('sprakradet_clean.json')
-#print(df.head())
+# Import data from the json-file
 
 with open('sprakradet_clean.json', 'r', encoding='utf-8') as f:
     data = json.load(f)
@@ -50,6 +46,7 @@ for chunk in chunk_text(raw_text, max_chars=200_000):
 filtered_lemmas = [w for w in lemmas if w not in norwegian_stopwords]
 filtered_text = ' '.join(filtered_lemmas)
 
+# Make word cloud
 
 wc = WordCloud(
     width=1200,
@@ -60,6 +57,8 @@ wc = WordCloud(
 )
 
 wordcloud = wc.generate(filtered_text)
+
+# Figure
 
 plt.figure(figsize=(12, 8))
 plt.imshow(wordcloud, interpolation='bilinear')
