@@ -5,7 +5,7 @@ Dette er bare litt morsom nettskraping? for å øve litt:)
 Dette er ordene som brukes mest i spørsmålene på Språkrådets sider. "Bruk" er visst det viktigste ordet, noe som for så vidt gir veldig mye mening.
 
 <p align='center'>
-  <img src='/figure/word_cloud.png' width=50%>
+  <img src='/figures/word_cloud.png' width=50%>
   <br>
   <i>Figur 1: Språkrådspørsmåls ordbruk</i>
 </p>
