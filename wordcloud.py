@@ -1,28 +1,18 @@
 import matplotlib.pyplot as plt
 from wordcloud import WordCloud
-import json
-import nb_core_news_sm
+from functions import read_json
+import nb_core_news_sm # Might need nltk to be downloaded
 
-# Only need to run once
+# Only need to run once, but needs nltk
 # nltk.download('stopwords')
 
 from nltk.corpus import stopwords
 
 # Import data from the json-file
 
-with open('sprakradet_clean.json', 'r', encoding='utf-8') as f:
-    data = json.load(f)
+filename = 'sprakradet_clean.json'
 
-all_text = []
-
-for item in data:
-    questions = ' '.join(item.get('question', []))
-    answers = ' '.join(item.get('answer', []))
-
-    all_text.append(questions)
-    all_text.append(answers)
-
-raw_text = ' '.join(all_text)
+text = read_json(filename=filename, sections=('answer', 'question'))
 
 # Stopwords and lemmatisation
 
@@ -36,7 +26,7 @@ def chunk_text(text, max_chars=200_000):
 
 lemmas = []
 
-for chunk in chunk_text(raw_text, max_chars=200_000):
+for chunk in chunk_text(text, max_chars=200_000):
     doc = nlp(chunk)
     lemmas.extend(
         token.lemma_.lower()
