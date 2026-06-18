@@ -19,3 +19,12 @@ count_answers_periods = text_answers.count('.')
 count_answers_commas = text_answers.count(',')
 
 print(f'There are {count_answers_periods} periods, {count_answers_commas} commas, and {count_answers_questionmarks} question marks')
+
+text_questions = read_json(filename=filename, sections='question')
+
+text_queries_periods = text_questions.count('.')
+text_queries_commas = text_questions.count(',')
+text_queries_questionmarks = text_questions.count('?')
+
+print(f'There are {text_queries_periods} periods, {text_queries_commas} commas, and {text_queries_questionmarks} question marks')
+
