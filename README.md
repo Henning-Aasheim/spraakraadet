@@ -10,5 +10,14 @@ Dette er ordene som brukes mest i tekstene på Språkrådets spørsmål og svar 
   <i>Figur 1: Språkrådspørsmåls ordbruk</i>
 </p>
 
+## Språk
+Dette er et plott som viser hvor mange av artiklene som er skrevet på bokmål og nynorsk. Problemet er at jeg ikke har en god nok måte å skille mellom språkene. Hadde jeg hatt tid hadde det vært mulig å bruke en eksisterende språkmodell (fastText) eller trene en egen modell, kanskje på Wikipedia.
+
+<p align='center'>
+  <img src='/figures/articles.png' width=50%>
+  <br>
+  <i>Figur 1: Språkrådspørsmåls ordbruk</i>
+</p>
+
 [^1]: "Lemmatisere er i morfologi og leksikografi å samle bøyingsformer i grupper som høyrer til det same oppslagsordet i ei ordbok — til dømes bok, boka, bøker, bøkene." - Rolf Theil. Store Norske Leksikon (2025). https://snl.no/lemmatisere 
 [^2]: https://spacy.io/usage/models
