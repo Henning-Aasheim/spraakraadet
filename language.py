@@ -1,6 +1,8 @@
 import json
 import pandas as pd
 import re
+import matplotlib.pyplot as plt
+
 
 # Proof of concept, badly executed
 
@@ -44,7 +46,7 @@ def classify_nb_nn(text: str) -> str:
         return "bokmål"
     else:
         # both, or neither → ambiguous
-        return "unknown"
+        return "ukjent"
 
 
 # Testing frequencies, but I am unsure if any of them really work.
@@ -67,7 +69,7 @@ def score_variant(text: str):
     elif bm_hits > nn_hits:
         return "bokmål"
     else:
-        return "unknown"
+        return "ukjent"
 
 # Apply to your dataframe
 # df is your DataFrame, 'answer' is the column with text / lists
@@ -78,12 +80,15 @@ articles["language_2"] = articles["answer"].apply(score_variant)
 tot_articles = len(articles)
 nn_articles = (articles['language'] == 'nynorsk').sum()
 frac_nn = nn_articles / tot_articles * 100
-unknown = (articles['language'] == 'unknown').sum()
+unknown = (articles['language'] == 'ukjent').sum()
 frac_unknown = unknown / tot_articles * 100
+bm_articles = (articles['language'] == 'bokmål').sum()
+frac_bm = bm_articles / tot_articles * 100
+
 
 nn_articles_2 = (articles['language_2'] == 'nynorsk').sum()
 frac_nn_2 = nn_articles_2 / tot_articles * 100
-unknown_2 = (articles['language_2'] == 'unknown').sum()
+unknown_2 = (articles['language_2'] == 'ukjent').sum()
 frac_unknown_2 = unknown_2 / tot_articles * 100
 
 
@@ -94,6 +99,13 @@ print(f'Av de {nn_articles_2} artiklene er {nn_articles_2} ({frac_nn_2:.2f}%) sk
 print(f'Av de {tot_articles} artiklene er {unknown_2} ({frac_unknown_2:.2f}%) skrevet på ukjent språk.')
 
 
+plt.figure(figsize=(10, 5))
+plt.bar(['bokmål', 'nynorsk', 'ukjent'], [bm_articles, nn_articles, unknown])
+plt.xticks(rotation=45)
+plt.title('Antall artikler per språk')
+plt.xlabel('Språk')
+plt.ylabel('Antall artikler')
+plt.show()
 
 
 
